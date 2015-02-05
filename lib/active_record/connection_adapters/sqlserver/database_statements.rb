@@ -294,7 +294,7 @@ module ActiveRecord
         protected
         
         def select(sql, name = nil, binds = [])
-          exec_query(sql, name, binds).to_a
+          with_sqlserver_error_handling { exec_query(sql, name, binds).to_a }
         end
         
         def sql_for_insert(sql, pk, id_value, sequence_name, binds)
