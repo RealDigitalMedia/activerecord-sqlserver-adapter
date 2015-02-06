@@ -31,12 +31,12 @@ module ActiveRecord
         
         def exec_delete(sql, name, binds)
           sql << "; SELECT @@ROWCOUNT AS AffectedRows"
-          super.rows.first.first
+          with_sqlserver_error_handling { super.rows.first.first }
         end
 
         def exec_update(sql, name, binds)
           sql << "; SELECT @@ROWCOUNT AS AffectedRows"
-          super.rows.first.first
+          with_sqlserver_error_handling { super.rows.first.first }
         end
 
         def outside_transaction?
